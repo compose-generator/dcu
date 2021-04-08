@@ -41,11 +41,14 @@ func SerializeToString(composeFile model.ComposeFile) (yamlString string, err er
 }
 
 // SerializeToFile wriet a ComposeFile object to a yaml file
-func SerializeToFile(composeFile model.ComposeFile) (err error) {
+func SerializeToFile(composeFile model.ComposeFile, path string) (err error) {
+	if strings.HasSuffix(path, ".yml") || strings.HasSuffix(path, ".yaml") {
+		return errors.New("the file must be of file type yml or yaml")
+	}
 	output, err := yaml.Marshal(&composeFile)
 	if err != nil {
 		return
 	}
-	err = ioutil.WriteFile("./docker-compose.yml", output, 0777)
+	err = ioutil.WriteFile(path, output, 0777)
 	return
 }
