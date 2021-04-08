@@ -19,7 +19,7 @@ func DeserializeFromString(yamlString string) (composeFile model.ComposeFile, er
 
 // DeserializeFromFile reads from a yaml file and converts it to a ComposeFile object
 func DeserializeFromFile(path string) (composeFile model.ComposeFile, err error) {
-	if strings.HasSuffix(path, ".yml") || strings.HasSuffix(path, ".yaml") {
+	if !strings.HasSuffix(path, ".yml") && !strings.HasSuffix(path, ".yaml") {
 		return model.ComposeFile{}, errors.New("the file must be of file type yml or yaml")
 	}
 	yamlFile, err := os.Open(path)
@@ -42,7 +42,7 @@ func SerializeToString(composeFile model.ComposeFile) (yamlString string, err er
 
 // SerializeToFile wriet a ComposeFile object to a yaml file
 func SerializeToFile(composeFile model.ComposeFile, path string) (err error) {
-	if strings.HasSuffix(path, ".yml") || strings.HasSuffix(path, ".yaml") {
+	if !strings.HasSuffix(path, ".yml") && !strings.HasSuffix(path, ".yaml") {
 		return errors.New("the file must be of file type yml or yaml")
 	}
 	output, err := yaml.Marshal(&composeFile)
