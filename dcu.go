@@ -42,7 +42,7 @@ func SerializeToString(composeFile model.ComposeFile) (yamlString string, err er
 	return string(bytes), err
 }
 
-// SerializeToFile wriet a ComposeFile object to a yaml file
+// SerializeToFile writes a ComposeFile object to a yaml file
 func SerializeToFile(composeFile model.ComposeFile, path string) (err error) {
 	if !strings.HasSuffix(path, ".yml") && !strings.HasSuffix(path, ".yaml") {
 		return errors.New("the file must be of file type yml or yaml")
