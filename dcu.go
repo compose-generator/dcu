@@ -57,7 +57,7 @@ func SerializeToFile(composeFile model.ComposeFile, path string) (err error) {
 
 // ---------------------------------------------------------------- Helper functions ---------------------------------------------------------------
 
-// GetVolumePathsFromComposeFile deserializes a compose file and returns all paths of volumes
+// GetVolumePathsFromComposeFilePath deserializes a compose file and returns all paths of volumes
 func GetVolumePathsFromComposeFilePath(composeFilePath string) []string {
 	composeFile, err := DeserializeFromFile(composeFilePath)
 	if err != nil {

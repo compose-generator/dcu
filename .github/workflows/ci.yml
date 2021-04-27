@@ -4,7 +4,7 @@ name: Go CI
 
 on:
   push:
-    branches: [ main, dev, feature/** ]
+    branches: [ main, dev, feature/**, tests/**, test/** ]
   pull_request:
     branches: [ main, dev ]
 
