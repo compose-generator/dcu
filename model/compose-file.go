@@ -4,5 +4,6 @@ package model
 type ComposeFile struct {
 	Version  string
 	Services map[string]Service
-	Networks map[string]Network `yaml:"networks,omitempty"`
+	Networks map[string]NetworkConfigurationReference `yaml:"networks,omitempty"`
+	Volumes  map[string]VolumeConfigurationReference  `yaml:"volumes,omitempty"`
 }

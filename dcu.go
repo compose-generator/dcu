@@ -11,6 +11,8 @@ import (
 	yaml "gopkg.in/yaml.v3"
 )
 
+// ---------------------------------------------------------- Serializing / Deserializing ----------------------------------------------------------
+
 // DeserializeFromString takes a yaml string and converts it to a ComposeFile object
 func DeserializeFromString(yamlString string) (composeFile model.ComposeFile, err error) {
 	err = yaml.Unmarshal([]byte(yamlString), &composeFile)
@@ -40,7 +42,7 @@ func SerializeToString(composeFile model.ComposeFile) (yamlString string, err er
 	return string(bytes), err
 }
 
-// SerializeToFile wriet a ComposeFile object to a yaml file
+// SerializeToFile writes a ComposeFile object to a yaml file
 func SerializeToFile(composeFile model.ComposeFile, path string) (err error) {
 	if !strings.HasSuffix(path, ".yml") && !strings.HasSuffix(path, ".yaml") {
 		return errors.New("the file must be of file type yml or yaml")
@@ -50,5 +52,48 @@ func SerializeToFile(composeFile model.ComposeFile, path string) (err error) {
 		return
 	}
 	err = ioutil.WriteFile(path, output, 0777)
+	return
+}
+
+// ---------------------------------------------------------------- Helper functions ---------------------------------------------------------------
+
+// GetVolumePathsFromComposeFile deserializes a compose file and returns all paths of volumes
+func GetVolumePathsFromComposeFilePath(composeFilePath string) []string {
+	composeFile, err := DeserializeFromFile(composeFilePath)
+	if err != nil {
+		panic(err)
+	}
+	return GetVolumePathsFromComposeFile(composeFile)
+}
+
+// GetVolumePathsFromComposeFile returns all paths of volumes
+func GetVolumePathsFromComposeFile(composeFile model.ComposeFile) (filePaths []string) {
+	for _, service := range composeFile.Services {
+		for _, volumeStmt := range service.Volumes {
+			volumePath := strings.Split(volumeStmt, ":")[0]
+			if strings.HasPrefix(volumePath, "./") || strings.HasPrefix(volumePath, "/") {
+				filePaths = append(filePaths, volumePath)
+			}
+		}
+	}
+	return
+}
+
+// GetEnvFilePathsFromComposeFilePath deserializes a compose file and returns all paths of env files
+func GetEnvFilePathsFromComposeFilePath(composeFilePath string) []string {
+	composeFile, err := DeserializeFromFile(composeFilePath)
+	if err != nil {
+		panic(err)
+	}
+	return GetEnvFilePathsFromComposeFile(composeFile)
+}
+
+// GetEnvFilePathsFromComposeFile returns all paths of env files
+func GetEnvFilePathsFromComposeFile(composeFile model.ComposeFile) (filePaths []string) {
+	for _, service := range composeFile.Services {
+		for _, envFilePath := range service.EnvFile {
+			filePaths = appendStringToSliceIfMissing(filePaths, envFilePath)
+		}
+	}
 	return
 }
