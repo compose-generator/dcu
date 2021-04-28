@@ -12,7 +12,7 @@ services:
         ports:
             - 3306:3306
         env_file:
-            - environment.env
+            - ./media/environment.env
         restart: always
     db-admin-phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
@@ -24,7 +24,7 @@ services:
         ports:
             - 82:80
         env_file:
-            - environment.env
+            - ./media/environment.env
         depends_on:
             - database-mysql
     frontend-angular:
@@ -45,7 +45,7 @@ services:
         ports:
             - 81:80
         env_file:
-            - environment.env
+            - ./media/environment.env
         restart: always
         depends_on:
             - database-mysql

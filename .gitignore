@@ -1,2 +1,5 @@
 # Ignore build output
 bin/*
+
+# Ignore test output
+test-output/*
