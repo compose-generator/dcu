@@ -1,4 +1,7 @@
-# Docker Compose Utils
+|:warning: | This library is deprecated and is not being used by Compose Generator anymore due to the migration to the [official Compose Spec implementation](https://github.com/compose-spec/compose-go). For that reason, please mind that this repository is not maintained anymore. |
+|----------|:-------------------------------|
+
+# Docker Compose Util
 ![GitHub release](https://img.shields.io/github/v/release/compose-generator/dcu?include_prereleases)
 ![Go CI](https://github.com/compose-generator/dcu/workflows/Go%20CI/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/compose-generator/dcu)](https://goreportcard.com/report/github.com/compose-generator/dcu)
@@ -13,8 +16,5 @@ This Go library can be used to serialize / deserialize docker compose yaml files
 ```sh
 go get github.com/compose-generator/dcu
 ```
-
-## Usage
-*ToDo: To be extended*
 
 © Marc Auberer 2021
