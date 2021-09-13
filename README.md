@@ -2,7 +2,6 @@
 |----------|:-------------------------------|
 
 # Docker Compose Util
-![GitHub release](https://img.shields.io/github/v/release/compose-generator/dcu?include_prereleases)
 ![Go CI](https://github.com/compose-generator/dcu/workflows/Go%20CI/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/compose-generator/dcu)](https://goreportcard.com/report/github.com/compose-generator/dcu)
 [![Codecov](https://codecov.io/gh/compose-generator/dcu/branch/main/graph/badge.svg?token=0EoAPqmDCv)](https://codecov.io/gh/compose-generator/dcu)
